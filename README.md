@@ -187,3 +187,14 @@ if(nodeList != null && nodeList.getLength()>0
     }
   }
 }
+
+
+public Document toDocument(SOAPMessage soapMsg) 
+                   throws TransformerConfigurationException, TransformerException, SOAPException, IOException {
+  Source src = soapMsg.getSOAPPart().getContent();
+  TransformerFactory tf = TransformerFactory.newInstance();
+  Transformer transformer = tf.newTransformer();
+  DOMResult result = new DOMResult();
+  transformer.transform(src, result);
+  return (Document)result.getNode();
+}
